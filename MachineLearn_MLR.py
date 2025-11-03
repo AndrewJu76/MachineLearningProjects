@@ -32,10 +32,10 @@ x_train =x_train.to_numpy()
 x_test =x_test.to_numpy()
 
 # standardization
-# scarler = StandardScaler()
-# scarler.fit(x_train)
-# x_train = scarler.transform(x_train)
-# x_test = scarler.transform(x_test)
+scarler = StandardScaler()
+scarler.fit(x_train)
+x_train = scarler.transform(x_train)
+x_test = scarler.transform(x_test)
 
 # y_pred = (x_train*w).sum(axis=1) + b
 def computer_cost(x,y,w,b):
@@ -88,10 +88,11 @@ test_pd = pd.DataFrame(
     }
 )
 print(test_pd)
-# print(computer_cost(x_test,y_test,w_final,b_final))
+print(computer_cost(x_test,y_test,w_final,b_final))
 
 # predict: 5.3, Master, CityA
 x_real = np.array([[5.3,2,1,0]])
+x_real = scarler.transform(x_real)
 y_real = (w_final*x_real).sum(axis=1) + b_final
 print('Prediction for the candidate: 5.3, Master, CityA ')
 print(f'The salary for this candidate should be {y_real}K')
